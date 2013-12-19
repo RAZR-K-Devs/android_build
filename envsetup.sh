@@ -697,7 +697,7 @@ function eat()
             done
             echo "Device Found.."
         fi
-    if (adb shell cat /system/build.prop | grep -q "ro.dwiz.device=$DWIZ_BUILD");
+    if (adb shell cat /system/build.prop | grep -q "ro.cm.device=$CM_BUILD");
     then
         # if adbd isn't root we can't write to /cache/recovery/
         adb root
@@ -726,7 +726,7 @@ EOF
     fi
     return $?
     else
-        echo "The connected device does not appear to be $DWIZ_BUILD, run away!"
+        echo "The connected device does not appear to be $CM_BUILD, run away!"
     fi
 }
 
@@ -1564,7 +1564,7 @@ function installboot()
     sleep 1
     adb wait-for-online shell mount /system 2>&1 > /dev/null
     adb wait-for-online remount
-    if (adb shell cat /system/build.prop | grep -q "ro.dwiz.device=$DWIZ_BUILD");
+    if (adb shell cat /system/build.prop | grep -q "ro.cm.device=$CM_BUILD");
     then
         adb push $OUT/boot.img /cache/
         for i in $OUT/system/lib/modules/*;
@@ -1580,7 +1580,7 @@ function installboot()
         adb shell chmod 644 /system/lib/modules/*
         echo "Installation complete."
     else
-        echo "The connected device does not appear to be $DWIZ_BUILD, run away!"
+        echo "The connected device does not appear to be $CM_BUILD, run away!"
     fi
 }
 
@@ -1614,13 +1614,13 @@ function installrecovery()
     sleep 1
     adb wait-for-online shell mount /system 2>&1 >> /dev/null
     adb wait-for-online remount
-    if (adb shell cat /system/build.prop | grep -q "ro.dwiz.device=$DWIZ_BUILD");
+    if (adb shell cat /system/build.prop | grep -q "ro.cm.device=$CM_BUILD");
     then
         adb push $OUT/recovery.img /cache/
         adb shell dd if=/cache/recovery.img of=$PARTITION
         echo "Installation complete."
     else
-        echo "The connected device does not appear to be $DWIZ_BUILD, run away!"
+        echo "The connected device does not appear to be $CM_BUILD, run away!"
     fi
 }
 
@@ -1994,7 +1994,7 @@ function dopush()
         echo "Device Found."
     fi
 
-    if (adb shell cat /system/build.prop | grep -q "ro.dwiz.device=$DWIZ_BUILD");
+    if (adb shell cat /system/build.prop | grep -q "ro.cm.device=$CM_BUILD");
     then
     # retrieve IP and PORT info if we're using a TCP connection
     TCPIPPORT=$(adb devices | egrep '^[0-9]+\.[0-9]+\.[0-9]+\.[0-9]+:[0-9]+[^0-9]+' \
@@ -2045,7 +2045,7 @@ function dopush()
     rm -f $OUT/.log
     return 0
     else
-        echo "The connected device does not appear to be $DWIZ_BUILD, run away!"
+        echo "The connected device does not appear to be $CM_BUILD, run away!"
     fi
 }
 
@@ -2127,7 +2127,7 @@ unset f
 
 # Add completions
 check_bash_version && {
-    dirs="sdk/bash_completion vendor/dwiz/bash_completion"
+    dirs="sdk/bash_completion vendor/cm/bash_completion"
     for dir in $dirs; do
     if [ -d ${dir} ]; then
         for f in `/bin/ls ${dir}/[a-z]*.bash 2> /dev/null`; do

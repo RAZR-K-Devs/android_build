@@ -453,32 +453,6 @@ def WriteFullOTAPackage(input_zip, output_zip):
   if OPTIONS.wipe_user_data:
     script.FormatPartition("/data")
 
-  script.Print("####################################");
-  script.Print("# __________________________________#");
-   script.Print("#| ___   \   \  \    /_____   /  /#");
-  script.Print("#| |   | |____\  \_____| |_/  /  /_#");
-  script.Print("#| |   | |_____\   ____   ___   ___#");
-  script.Print("#| |___| |      \  \_ /   \_/  /   #");
-  script.Print("#|_______/       \____________/    #");
-  script.Print("#                      /  /____ _ _#");
-  script.Print("#                     /_________ /_#");
-  script.Print("# -------------------------------- #");
-  script.Print("#                                  #");
-  script.Print("# Developer: dtrail1               #");
-  script.Print("#                                  #");
-  script.Print("# Twitter: @dtrail1_xda            #");
-  script.Print("#                                  #");
-  script.Print("####################################"); 
-  script.Print("# Details:                         #");
-  jellybamv = GetBuildProp("ro.dwiz.version", OPTIONS.info_dict)
-  script.Print("# Version: %s"%(jellybamv));                    #");
-  device = GetBuildProp("ro.product.device", OPTIONS.info_dict)
-  model = GetBuildProp("ro.product.model", OPTIONS.info_dict)
-  script.Print("# Device: %s (%s)"%(model, device));
-  script.Print("#                                  #");
-  script.Print("####################################");
-
-
   if "selinux_fc" in OPTIONS.info_dict:
     WritePolicyConfig(OPTIONS.info_dict["selinux_fc"], output_zip)
 
