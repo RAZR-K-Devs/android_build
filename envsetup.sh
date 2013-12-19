@@ -73,20 +73,13 @@ function check_product()
         return
     fi
 
-#    if (echo -n $1 | grep -q -e "^cm_") ; then
-#       CM_BUILD=$(echo -n $1 | sed -e 's/^cm_//g')
-#       export BUILD_NUMBER=$((date +%s%N ; echo $CM_BUILD; hostname) | openssl sha1 | sed -e 's/.*=//g; s/ //g' | cut -c1-10)
-#    else
-#       CM_BUILD=
-#    fi
-#    export CM_BUILD
-
-    if (echo -n $1 | grep -q -e "^dwiz_") ; then
-       DWIZ_BUILD=$(echo -n $1 | sed -e 's/^dwiz_//g')
+    if (echo -n $1 | grep -q -e "^cm_") ; then
+       CM_BUILD=$(echo -n $1 | sed -e 's/^cm_//g')
+       export BUILD_NUMBER=$((date +%s%N ; echo $CM_BUILD; hostname) | openssl sha1 | sed -e 's/.*=//g; s/ //g' | cut -c1-10)
     else
-       DWIZ_BUILD=
+       CM_BUILD=
     fi
-    export DWIZ_BUILD
+    export CM_BUILD
 
     CALLED_FROM_SETUP=true BUILD_SYSTEM=build/core \
         TARGET_PRODUCT=$1 \
